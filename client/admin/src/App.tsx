@@ -1,21 +1,41 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from 'react';
 import "./App.css";
-import SubjectCard from "./components/SubjectCard"
-import { pokeAPI } from "./services/pokeapi";
+import SubjectCard from "./components/SubjectCard";
+import { pokeAPI, internarAPI } from './services/apis';
+
 function App() {
   const [pokemon, setPokemon] = useState(null);
-
+  const [click, setClick ] = useState(false);
   useEffect(() => {
-    pokeAPI.get('/pojemon/ditto').then(response => {
-      debugger;
-      setPokemon(response.data);
-    })
-    .catch(error => {
-      console.error('Error')
-    })
-  })
+    pokeAPI.get('/pokemon/charmander')
+      .then(response => {
+        setPokemon(response.data);
+        console.table(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+
+    internarAPI.get('/pokemons')
+      .then(response => {
+        setPokemon(response.data);
+        console.table(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }, [click]);
+
+  const clicked = () => {
+    console.log('haciendo click');
+    setClick(!click);
+  }
+
   return (
+    <>
     <SubjectCard/>
+    <button onClick={clicked}> hazme click!!!</button>
+    </>
   );
 }
 
