@@ -22,3 +22,13 @@ export const internarAPI = axios.create({
         // Aquí puedes agregar otros encabezados si es necesario
     },
 });
+
+const STUDENTS_BASE_URL = 'http://localhost:3000/api/';
+export const studentAPI = axios.create({
+    baseURL: STUDENTS_BASE_URL, // Cambia esta URL por tu API
+    timeout: 10000, // Tiempo máximo de espera para las solicitudes (en milisegundos)
+    headers: {
+        'Content-Type': 'application/json',
+        // Aquí puedes agregar otros encabezados si es necesario
+    },
+});
